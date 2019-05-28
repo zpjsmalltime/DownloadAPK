@@ -1,9 +1,7 @@
 package com.joyshebao.download_apk;
 
-import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -21,10 +19,10 @@ import java.io.File;
  * Created by zhangpengju on 2019/5/23.
  */
 
-public class Utils {
+public class DownloadApkUtil {
 
     public static void testUtils(){
-        Log.e(Utils.class.getSimpleName(),"-------------------------------->");
+        Log.e(DownloadApkUtil.class.getSimpleName(),"-------------------------------->");
 
 
 
@@ -167,7 +165,7 @@ public class Utils {
             }else {
                 installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 uri = FileProvider.getUriForFile(context,"com.joyshebao.download_apk.FileProvider",file);
-                Utils.installApk(context,installIntent,uri);
+                DownloadApkUtil.installApk(context,installIntent,uri);
             }
 
             installApk(context,installIntent,uri);

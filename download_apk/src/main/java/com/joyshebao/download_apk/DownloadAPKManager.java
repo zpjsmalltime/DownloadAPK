@@ -5,11 +5,8 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
@@ -107,7 +104,7 @@ public class DownloadAPKManager {
         request.setDestinationInExternalFilesDir(context,null,apkName);
 
 
-        Utils.cleanOldApk(context,this);
+        DownloadApkUtil.cleanOldApk(context,this);
 
     }
 

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.support.v4.content.FileProvider;
 
 import java.io.File;
@@ -45,13 +44,13 @@ public class DownloadReceiver extends BroadcastReceiver {
             if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){//6.0以下安装
 
                 uri = downloadManager.getUriForDownloadedFile(id);
-                Utils.installApk(context,installIntent,uri);
+                DownloadApkUtil.installApk(context,installIntent,uri);
 
             }else if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
 
-                File file = Utils.queryDownloadedApk(context, completeDownloadId);
+                File file = DownloadApkUtil.queryDownloadedApk(context, completeDownloadId);
                 uri = Uri.fromFile(file);
-                Utils.installApk(context,installIntent,uri);
+                DownloadApkUtil.installApk(context,installIntent,uri);
             }else {
                 installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 //                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),apkName);
@@ -61,8 +60,8 @@ public class DownloadReceiver extends BroadcastReceiver {
 
                 uri = FileProvider.getUriForFile(context,"com.joyshebao.download_apk.FileProvider",file);
 
-//                Utils.installApk28(context,installIntent,uri);
-                Utils.installApk(context,installIntent,uri);
+//                DownloadApkUtil.installApk28(context,installIntent,uri);
+                DownloadApkUtil.installApk(context,installIntent,uri);
             }
 
         }
