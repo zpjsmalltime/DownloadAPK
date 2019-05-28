@@ -52,16 +52,7 @@ public class DownloadReceiver extends BroadcastReceiver {
                 File file = Utils.queryDownloadedApk(context, completeDownloadId);
                 uri = Uri.fromFile(file);
                 Utils.installApk(context,installIntent,uri);
-            }else if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-                installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),apkName);
-
-                File file = new File(context.getExternalFilesDir(null),apkName);
-
-                uri = FileProvider.getUriForFile(context,"com.joyshebao.download_apk.FileProvider",file);
-                Utils.installApk(context,installIntent,uri);
-
-            }else{
+            }else {
                 installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 //                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),apkName);
 

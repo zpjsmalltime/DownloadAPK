@@ -68,7 +68,7 @@ public class DownloadAPKManager {
     }
 
 
-    public void initComplete(String urlHttp,String title,boolean isOnlyWifi,String apkName){
+    public void config(String urlHttp, String title, boolean isOnlyWifi, String apkName){
         this.urlHttp = urlHttp;
         this.title = title;
         this.isOnlyWifi = isOnlyWifi;
@@ -104,17 +104,10 @@ public class DownloadAPKManager {
 
 //        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, apkName);
 
-        try {
-            File file = new File(context.getExternalFilesDir(null), apkName);
-
-            if (file.exists()) {
-                file.delete();
-            }
-        }catch (Exception e){
-
-        }
-
         request.setDestinationInExternalFilesDir(context,null,apkName);
+
+
+        Utils.cleanOldApk(context,this);
 
     }
 
@@ -135,8 +128,21 @@ public class DownloadAPKManager {
     }
 
 
+
+    public boolean deleteApk(){
+
+        File file = new File(context.getExternalFilesDir(null),apkName);
+        if(file.exists()){
+            return file.delete();
+        }
+
+        return true;
+
+    }
+
+
     public void startDowload(){
-        if(downloadManager == null)return;
+        if(downloadManager == null || urlHttp == null)return;
 
         try {
             id = downloadManager.enqueue(request);
