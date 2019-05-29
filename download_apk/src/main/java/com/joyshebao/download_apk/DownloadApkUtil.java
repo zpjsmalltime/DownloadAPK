@@ -33,6 +33,19 @@ public class DownloadApkUtil {
 
 
 
+    public static DownloadAPKManager getDownloadManager(Context context,String downloadHttpUrl,String title,String apkName){
+
+       DownloadAPKManager instance = DownloadAPKManager.getManager(context);
+
+
+        instance.config(downloadHttpUrl,title,true,apkName);
+
+        return instance;
+
+    }
+
+
+
     public static void installApk(Context context, Intent installIntent, Uri uri){
 
         installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
